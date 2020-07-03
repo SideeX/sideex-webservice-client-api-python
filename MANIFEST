@@ -1,0 +1,7 @@
+setup.cfg
+setup.py
+sideex-webservice-client/__init__.py
+sideex-webservice-client/SideeXWebServiceClientAPI.py
+sideex-webservice-client/test.py
+LICENSE.txt
+README.md
