@@ -29,7 +29,7 @@ class SideeXWebServiceClientAPI():
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=self.sslContext)) as session:
             data = aiohttp.FormData()
             data.add_field('file', file, filename=os.path.basename(file.name), content_type='application/x-www-form-urlencoded')
-            async with session.post(self.baseURL+"sideex-webservice", data = data) as resp:
+            async with session.post(self.baseURL+"sideex-webservice/runTestSuites", data = data) as resp:
                 return await resp.text()
     
     async def getState(self, token):
@@ -37,15 +37,15 @@ class SideeXWebServiceClientAPI():
             data = aiohttp.FormData()
             data.add_field('token', token, content_type='application/x-www-form-urlencoded')
 
-            async with session.get(self.baseURL+"sideex-webservice-state", data = data) as resp:
+            async with session.get(self.baseURL+"sideex-webservice/getState", data = data) as resp:
                 return await resp.text()
 
     async def download(self, formData, filePath, option):
         tempURL = self.baseURL
         if option == 0:
-            tempURL = tempURL + "sideex-webservice-reports"
+            tempURL = tempURL + "sideex-webservice/downloadReports"
         else:
-            tempURL = tempURL + "sideex-webservice-logs"
+            tempURL = tempURL + "sideex-webservice/downloadLogs"
 
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=self.sslContext)) as session:
             async with session.get(tempURL, data = formData) as resp:
@@ -53,10 +53,10 @@ class SideeXWebServiceClientAPI():
                 with open(filePath, "wb") as f:
                     f.write(test)
     
-    async def deleteReport(self, token):
+    async def deleteJob(self, token):
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=self.sslContext)) as session:
             data = aiohttp.FormData()
             data.add_field('token', token, content_type='application/x-www-form-urlencoded')
 
-            async with session.post(self.baseURL+"sideex-webservice-delete", data = data) as resp:
+            async with session.post(self.baseURL+"sideex-webservice/deleteJob", data = data) as resp:
                 return await resp.text()

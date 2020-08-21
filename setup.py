@@ -6,7 +6,7 @@ with open("README.md", "r") as readme_file:
 
 setuptools.setup(
     name='sideex-webservice-client',
-    version='0.9.0-1',
+    version='0.9.1',
     author='SideeX Team',
     author_email='feedback@sideex.io',
     description='SideeX WebService Client API for Python handles the transfer of test suites to a self-hosted SideeX WebService server and returns the test reports.',

@@ -2,16 +2,17 @@
 import asyncio
 import aiohttp
 import json
-SideeXWebServiceClientAPI = __import__("sideex-webservice-client").SideeXWebServiceClientAPI
-ProtocalType = __import__("sideex-webservice-client").ProtocalType
+import SideeXWebServiceClientAPI
+
+ProtocalType = SideeXWebServiceClientAPI.ProtocalType
+SideeXWebServiceClient = SideeXWebServiceClientAPI.SideeXWebServiceClientAPI
 
 async def delay(time):
     await asyncio.sleep(time)
 
 if __name__=="__main__":
     #Connect to a SideeX WebService server
-    print(SideeXWebServiceClientAPI)
-    ws_client = SideeXWebServiceClientAPI('http://127.0.0.1:50000', ProtocalType.HTTP)
+    ws_client = SideeXWebServiceClient('http://127.0.0.1:50000', ProtocalType.HTTP)
     file = open('testcase.zip','rb')
     
     token = json.loads(asyncio.run(ws_client.runTestSuite(file)))['token']# get the token
@@ -43,6 +44,6 @@ if __name__=="__main__":
             asyncio.run(ws_client.download( froamData, "./logs.zip", 1))
 
             #Delete the test case and report from the server
-            print(asyncio.run(ws_client.deleteReport(token)))
+            print(asyncio.run(ws_client.deleteJob(token)))
 
             flag = True
