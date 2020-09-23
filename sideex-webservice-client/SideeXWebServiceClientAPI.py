@@ -5,24 +5,24 @@ import os
 import ssl
 from enum import Enum
 
-class ProtocalType(Enum):
+class ProtocolType(Enum):
     HTTP = 0
     HTTPS_DISABLE = 1
     HTTPS_ENABLE = 2
 
 class SideeXWebServiceClientAPI():
-    def __init__(self, baseURL, protocalType=ProtocalType.HTTP, caFilePath=None):
+    def __init__(self, baseURL, protocolType=ProtocolType.HTTP, caFilePath=None):
         self.baseURL = baseURL
-        self.protocalType = protocalType
+        self.protocolType = protocolType
         self.caFilePath = caFilePath
         self.sslContext = None
 
         if self.baseURL[-1] != '/':
             self.baseURL = self.baseURL + "/"
 
-        if self.protocalType == ProtocalType.HTTPS_DISABLE:
+        if self.protocolType == ProtocolType.HTTPS_DISABLE:
             self.sslContext = False
-        elif self.protocalType == ProtocalType.HTTPS_ENABLE:
+        elif self.protocolType == ProtocolType.HTTPS_ENABLE:
             self.sslContext = ssl.create_default_context(cafile=self.caFilePath)
 
     async def runTestSuite(self, file):

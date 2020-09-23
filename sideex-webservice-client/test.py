@@ -4,7 +4,7 @@ import aiohttp
 import json
 import SideeXWebServiceClientAPI
 
-ProtocalType = SideeXWebServiceClientAPI.ProtocalType
+ProtocolType = SideeXWebServiceClientAPI.ProtocolType
 SideeXWebServiceClient = SideeXWebServiceClientAPI.SideeXWebServiceClientAPI
 
 async def delay(time):
