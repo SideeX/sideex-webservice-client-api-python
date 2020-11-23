@@ -25,6 +25,14 @@ class SideeXWebServiceClientAPI():
         elif self.protocolType == ProtocolType.HTTPS_ENABLE:
             self.sslContext = ssl.create_default_context(cafile=self.caFilePath)
 
+    async def echo(self):
+        async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=self.sslContext)) as session:
+            # data = aiohttp.FormData()
+            # data.add_field('token', token, content_type='application/x-www-form-urlencoded')
+
+            async with session.get(self.baseURL+"sideex-webservice/echo") as resp:
+                return await resp.text()
+
     async def runTestSuite(self, file):
         async with aiohttp.ClientSession(connector=aiohttp.TCPConnector(ssl=self.sslContext)) as session:
             data = aiohttp.FormData()

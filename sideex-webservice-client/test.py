@@ -12,8 +12,11 @@ async def delay(time):
 
 if __name__=="__main__":
     #Connect to a SideeX WebService server
-    ws_client = SideeXWebServiceClient('http://127.0.0.1:50000', ProtocalType.HTTP)
-    file = open('testcase.zip','rb')
+    ws_client = SideeXWebServiceClient('http://127.0.0.1:50000', ProtocolType.HTTP)
+    file = open('D:/workspace/sideex-webservice-client-api-java/testcase.zip','rb')
+
+    #Get the server survival status
+    print(asyncio.run(ws_client.echo()))
     
     token = json.loads(asyncio.run(ws_client.runTestSuite(file)))['token']# get the token
     flag = False
