@@ -15,7 +15,7 @@ if __name__=="__main__":
     ws_client = SideeXWebServiceClient('http://127.0.0.1:50000', ProtocolType.HTTP)
     file = open('D:/workspace/sideex-webservice-client-api-java/testcase.zip','rb')
 
-    #Get the server survival status
+    #//Gets SideeX WebService server status
     print(asyncio.run(ws_client.echo()))
     
     token = json.loads(asyncio.run(ws_client.runTestSuite(file)))['token']# get the token
